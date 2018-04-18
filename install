@@ -1,0 +1,47 @@
+#!/bin/bash
+
+clear
+echo $(tput bold)$(tput setaf 1)""
+echo "##################################################################"
+echo "#######                    "$(tput setaf 3)"W A R N I N G"$(tput setaf 1)"                   #######"
+echo "##################################################################"
+echo ""
+echo ""
+echo ""$(tput setaf 2)
+echo "System requirements:"$(tput setaf 7)
+echo "1) Please make sure you have installed "$(tput setaf 1)"metasploit-framework"$(tput setaf 7)" on your machine"
+echo "2) If you haven't install it, you can visit "$(tput setaf 6)"https://gist.github.com/minkione/1dc1ab8d4f66d8d1c2c69282ee980ba9"$(tput setaf 7)" for the installation."
+echo ""
+echo ""
+echo ""
+echo $(tput setaf 6)"Continue install "$(tput setaf 3)"EXPLOIT INJECTION TOOL"$(tput setaf 6)" ? ("$(tput setaf 2)"yes"$(tput setaf 6)" or "$(tput setaf 1)"no"$(tput setaf 6)")"
+read -p $(tput sgr0)"Your answer: "$(tput bold)$(tput setaf 6) answer
+echo ""
+echo ""
+echo ""
+case $answer in
+no)
+echo $(tput sgr0)$(tput bold)$(tput setaf 1)"Installation aborted."
+echo ""
+;;
+yes)
+echo $(tput sgr0)$(tput bold)$(tput setaf 2)"** Installing eitool..."
+echo "** Copying binary..."
+cp bin/eitool /bin/eitool
+echo "** Setting permission..."
+chmod 755 /bin/eitool
+echo "** Change owner..."
+chown $(whoami) /bin/eitool
+echo "** Finishing installation..."
+echo $(tput setaf 6)"INSTALLATION COMPLETED."
+echo ""
+echo ""
+echo $(tput sgr0)"You can type "$(tput setaf 2)"eitool"$(tput sgr0)" on your terminal to run"
+;;
+*)
+echo $(tput sgr0)$(tput bold)$(tput setaf 1)"WRONG ANSWER."
+echo ""
+echo ""
+;;
+esac
+
